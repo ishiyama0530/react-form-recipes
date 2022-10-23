@@ -25,11 +25,9 @@ export default function Page2() {
       email: emailRef.current?.value ?? "",
     }
     if (validation(formData)) {
-      if (validation(formData)) {
-        alert("OK")
-      } else {
-        alert("INVALID")
-      }
+      alert("OK")
+    } else {
+      alert("INVALID")
     }
   }
 

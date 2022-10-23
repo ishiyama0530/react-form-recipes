@@ -1,5 +1,3 @@
-import React from "react"
-
 export type ErrorsMap<T extends string = string> = { [K in T]?: string[] }
 type PropsBase = Omit<JSX.IntrinsicElements["input"], "type" | "id">
 export type Props<T extends string = string> = PropsBase & {
@@ -8,19 +6,14 @@ export type Props<T extends string = string> = PropsBase & {
   inputRef?: React.Ref<HTMLInputElement>
 }
 
-export const TextField = <T extends string>(props: Props<T>) => {
-  const { errors, style, inputRef, ...others } = props
+export function TextField<T extends string>(props: Props<T>) {
+  const { errors, inputRef, ...others } = props
   const error = errors?.[others.id]
   return (
     <div>
-      <input
-        type="text"
-        style={{ borderColor: error ? "red" : "inherit", ...style }}
-        {...others}
-        ref={inputRef}
-      />
+      <input type="text" {...others} ref={inputRef} />
       {error?.map((x) => (
-        <p style={{ color: "red" }}>{x}</p>
+        <p>{x}</p>
       ))}
     </div>
   )
