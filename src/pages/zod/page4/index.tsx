@@ -1,11 +1,11 @@
-import { TextField } from "../../components/TextField"
+import { TextField } from "../../../components/TextField"
 import {
   SubmitErrorHandler,
   SubmitHandler,
   useUserForm,
 } from "./hooks/useUserForm"
 
-export default function Page4() {
+const Page4 = () => {
   const { handleSubmit, errors, fieldValues } = useUserForm()
 
   const handleValid: SubmitHandler = (data, event) => alert("OK")
@@ -21,3 +21,5 @@ export default function Page4() {
     </form>
   )
 }
+
+export default Page4

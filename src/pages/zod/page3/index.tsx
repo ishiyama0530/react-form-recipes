@@ -6,7 +6,7 @@ import {
   UseFormRegisterReturn,
 } from "react-hook-form"
 import { z } from "zod"
-import { ErrorsMap, TextField } from "../../components/TextField"
+import { ErrorsMap, TextField } from "../../../components/TextField"
 
 const schema = z.object({
   name: z
@@ -18,7 +18,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 const defaultValues: FormData = { name: "", email: "" } as const
 
-export default function Page3() {
+const Page3 = () => {
   const {
     register,
     handleSubmit,
@@ -52,3 +52,5 @@ export default function Page3() {
 function convert(original: UseFormRegisterReturn) {
   return { inputRef: original.ref, ...original }
 }
+
+export default Page3

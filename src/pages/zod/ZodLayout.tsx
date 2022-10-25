@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { NavLink, NavLinkProps, Outlet } from "react-router-dom"
 
-export default function Layout() {
+export default function ZodLayout() {
   const [activeId, setActiveId] = useState("page1")
   return (
     <div>

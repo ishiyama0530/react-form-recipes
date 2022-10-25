@@ -6,7 +6,7 @@ import {
   UseFormRegisterReturn,
 } from "react-hook-form"
 import { z } from "zod"
-import { ErrorsMap } from "../../../components/TextField"
+import { ErrorsMap } from "../../../../components/TextField"
 
 const schema = z.object({
   name: z
@@ -15,11 +15,11 @@ const schema = z.object({
     .regex(/^[a-z]+$/, "a ~ z"),
   email: z.string().email(),
 })
-type FormData = z.infer<typeof schema>
-const defaultValues: FormData = { name: "", email: "" } as const
+type FormValues = z.infer<typeof schema>
+const defaultValues: FormValues = { name: "", email: "" } as const
 
-export type SubmitHandler = SubmitHandlerOrigin<FormData>
-export type SubmitErrorHandler = SubmitErrorHandlerOriginal<FormData>
+export type SubmitHandler = SubmitHandlerOrigin<FormValues>
+export type SubmitErrorHandler = SubmitErrorHandlerOriginal<FormValues>
 
 export function useUserForm() {
   const {
@@ -27,12 +27,12 @@ export function useUserForm() {
     handleSubmit: handleSubmitOriginal,
     formState: { errors: rawErrors },
   } = useForm({
-    mode: 'onChange',
+    mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues,
   })
 
-  const errors: ErrorsMap<keyof FormData> = {
+  const errors: ErrorsMap<keyof FormValues> = {
     name: convertError(rawErrors.name?.message),
     email: convertError(rawErrors.email?.message),
   }

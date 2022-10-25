@@ -6,7 +6,7 @@ export type Props<T extends string = string> = PropsBase & {
   inputRef?: React.Ref<HTMLInputElement>
 }
 
-export function TextField<T extends string>(props: Props<T>) {
+export const TextField = <T extends string>(props: Props<T>) => {
   const { errors, inputRef, ...others } = props
   const error = errors?.[others.id]
   return (
