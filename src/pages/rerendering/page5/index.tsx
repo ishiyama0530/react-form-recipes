@@ -1,9 +1,8 @@
 import { memo, useState } from "react"
 import { SubmitHandler, useForm, UseFormRegisterReturn } from "react-hook-form"
 import { HeavyComponent } from "../../../components/HeavyComponent"
-import { Input, InputProps } from "../../../components/Input"
+import { Input } from "../../../components/Input"
 
-const InputMemo = memo((props: InputProps) => <Input {...props} />)
 const HeavyComponentMemo = memo(() => <HeavyComponent />)
 
 type FormValues = {
@@ -20,8 +19,8 @@ const Page = () => {
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <InputMemo {...convert(register("input1"))} />
-      <InputMemo {...convert(register("input2"))} />
+      <Input {...convert(register("input1"))} />
+      <Input {...convert(register("input2"))} />
       <small>{JSON.stringify(state)}</small>
       <HeavyComponentMemo />
       <button>submit</button>
@@ -29,6 +28,7 @@ const Page = () => {
   )
 }
 
+// Input.tsxではrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
 function convert(original: UseFormRegisterReturn) {
   return { inputRef: original.ref, ...original }
 }
