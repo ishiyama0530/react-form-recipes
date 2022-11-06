@@ -13,7 +13,9 @@ export const TextField = <T extends string>(props: Props<T>) => {
     <div>
       <input type="text" {...others} ref={inputRef} />
       {error?.map((x) => (
-        <p>{x}</p>
+        <p>
+          <small>{x}</small>
+        </p>
       ))}
     </div>
   )
