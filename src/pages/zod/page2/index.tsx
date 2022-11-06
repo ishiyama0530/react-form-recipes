@@ -12,7 +12,7 @@ const scheme = z.object({
 type FormData = z.infer<typeof scheme>
 const defaultFormData: FormData = { name: "", email: "" } as const
 
-const Page2 = () => {
+const Page = () => {
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const [zodError, setZodError] = useState<ZodError<FormData> | null>(null)
@@ -72,4 +72,4 @@ const Page2 = () => {
   )
 }
 
-export default Page2
+export default Page

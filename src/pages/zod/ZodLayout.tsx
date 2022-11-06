@@ -33,7 +33,7 @@ export default function ZodLayout() {
             activeId={activeId}
             onClick={() => setActiveId("page4")}
           >
-            React-Hook-Formに関するフォームをカスタムフックに（実運用）
+            React-Hook-Formに関するフォームをカスタムフックに
           </LinkItem>
         </ul>
       </nav>

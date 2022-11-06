@@ -18,7 +18,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 const defaultValues: FormData = { name: "", email: "" } as const
 
-const Page3 = () => {
+const Page = () => {
   const {
     register,
     handleSubmit,
@@ -53,4 +53,4 @@ function convert(original: UseFormRegisterReturn) {
   return { inputRef: original.ref, ...original }
 }
 
-export default Page3
+export default Page

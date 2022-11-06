@@ -12,7 +12,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 const defaultFormData: FormData = { name: "", email: "" } as const
 
-const Page1 = () => {
+const Page = () => {
   const [formData, setFormData] = useState(defaultFormData)
   const [zodError, setZodError] = useState<ZodError<FormData> | null>(null)
   const errors = zodError?.flatten().fieldErrors
@@ -63,4 +63,4 @@ const Page1 = () => {
   )
 }
 
-export default Page1
+export default Page
