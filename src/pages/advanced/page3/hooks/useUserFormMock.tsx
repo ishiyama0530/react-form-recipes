@@ -1,9 +1,6 @@
-import { ErrorsMap } from "../../../../components/TextField"
 import { UserForm } from "./useUserForm"
 
 export const useUserForm = (): UserForm => {
-  const errors: ErrorsMap<any> = {}
-
   const handleSubmit = (onValid: any) => () => {
     onValid()
     return Promise.resolve()
@@ -11,7 +8,10 @@ export const useUserForm = (): UserForm => {
 
   return {
     handleSubmit,
-    errors,
+    errors: {
+      name: undefined,
+      email: undefined,
+    },
     fieldValues: {
       name: { ...mockFieldValue, name: "name" },
       email: { ...mockFieldValue, name: "email" },

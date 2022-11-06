@@ -3,16 +3,13 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-  UseFormRegisterReturn
+  UseFormRegisterReturn,
 } from "react-hook-form"
 import { z } from "zod"
-import { ErrorsMap, TextField } from "../../../components/TextField"
+import { InputField } from "../../../components/InputField"
 
 const schema = z.object({
-  name: z
-    .string()
-    .min(5)
-    .regex(/^[a-z]+$/, "a ~ z"),
+  name: z.string().min(5),
   email: z.string().email(),
 })
 type FormData = z.infer<typeof schema>
@@ -22,17 +19,12 @@ const Page = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors: rawErrors },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues,
   })
-
-  const errors: ErrorsMap<keyof FormData> = {
-    name: rawErrors.name?.message ? [rawErrors.name?.message] : undefined,
-    email: rawErrors.email?.message ? [rawErrors.email?.message] : undefined,
-  }
 
   const handleValid: SubmitHandler<FormData> = (data, event) => alert("OK")
   const handleInvalid: SubmitErrorHandler<FormData> = (errors, event) =>
@@ -41,16 +33,27 @@ const Page = () => {
   return (
     <form onSubmit={handleSubmit(handleValid, handleInvalid)} noValidate>
       <div>名前:</div>
-      <TextField {...convert(register("name"))} id="name" errors={errors} />
+      <InputField
+        {...convert(register("name"))}
+        errors={resolve(errors.name)}
+      />
       <div>メール:</div>
-      <TextField {...convert(register("email"))} id="email" errors={errors} />
+      <InputField
+        {...convert(register("email"))}
+        errors={resolve(errors.email)}
+      />
       <button>submit</button>
     </form>
   )
 }
 
+// Input.tsxではrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
 function convert({ ref, ...others }: UseFormRegisterReturn) {
   return { inputRef: ref, ...others }
+}
+
+function resolve(field?: { message?: string }) {
+  return field?.message ? [field?.message] : undefined
 }
 
 export default Page

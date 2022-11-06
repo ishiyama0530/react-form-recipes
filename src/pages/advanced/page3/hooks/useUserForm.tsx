@@ -6,20 +6,15 @@ import {
   UseFormRegisterReturn,
 } from "react-hook-form"
 import { z } from "zod"
-import { ErrorsMap } from "../../../../components/TextField"
-
-export type UserForm = ReturnType<typeof useUserForm>
 
 const schema = z.object({
-  name: z
-    .string()
-    .min(5)
-    .regex(/^[a-z]+$/, "a ~ z"),
+  name: z.string().min(5),
   email: z.string().email(),
 })
 type FormValues = z.infer<typeof schema>
 const defaultValues: FormValues = { name: "", email: "" } as const
 
+export type UserForm = ReturnType<typeof useUserForm>
 export type SubmitHandler = SubmitHandlerOriginal<FormValues>
 export type SubmitErrorHandler = SubmitErrorHandlerOriginal<FormValues>
 
@@ -27,17 +22,12 @@ export const useUserForm = () => {
   const {
     register,
     handleSubmit: handleSubmitOriginal,
-    formState: { errors: rawErrors },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues,
   })
-
-  const errors: ErrorsMap<keyof FormValues> = {
-    name: convertError(rawErrors.name?.message),
-    email: convertError(rawErrors.email?.message),
-  }
 
   const handleSubmit = (
     onValid: SubmitHandler,
@@ -46,18 +36,22 @@ export const useUserForm = () => {
 
   return {
     handleSubmit,
-    errors,
+    errors: {
+      name: resolve(errors.name),
+      email: resolve(errors.email),
+    },
     fieldValues: {
-      name: convertFieldValues(register("name")),
-      email: convertFieldValues(register("email")),
+      name: convert(register("name")),
+      email: convert(register("email")),
     },
   }
 }
 
-function convertError(error: string | undefined) {
-  return error ? [error] : undefined
+// Input.tsxではrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
+function convert({ ref, ...others }: UseFormRegisterReturn) {
+  return { inputRef: ref, ...others }
 }
 
-function convertFieldValues({ ref, ...others }: UseFormRegisterReturn) {
-  return { inputRef: ref, ...others }
+function resolve(field?: { message?: string }) {
+  return field?.message ? [field?.message] : undefined
 }

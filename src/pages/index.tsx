@@ -8,10 +8,9 @@ export default function Home() {
           <NavLink to="rerendering">再描画について</NavLink>
         </li>
         <li>
-          <NavLink to="zod">Zodを使用したフォーム</NavLink>
-        </li>
-        <li>
-          <NavLink to="advanced">実践的なフォーム</NavLink>
+          <NavLink to="advanced">
+            フォームの関心事をカスタムフックに切り出す
+          </NavLink>
         </li>
       </ul>
     </nav>
