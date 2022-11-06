@@ -3,7 +3,7 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-  UseFormRegisterReturn,
+  UseFormRegisterReturn
 } from "react-hook-form"
 import { z } from "zod"
 import { ErrorsMap, TextField } from "../../../components/TextField"
@@ -49,8 +49,8 @@ const Page = () => {
   )
 }
 
-function convert(original: UseFormRegisterReturn) {
-  return { inputRef: original.ref, ...original }
+function convert({ ref, ...others }: UseFormRegisterReturn) {
+  return { inputRef: ref, ...others }
 }
 
 export default Page
