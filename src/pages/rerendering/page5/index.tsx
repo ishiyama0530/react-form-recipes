@@ -29,8 +29,8 @@ const Page = () => {
 }
 
 // Input.tsxではrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
-function convert(original: UseFormRegisterReturn) {
-  return { inputRef: original.ref, ...original }
+function convert({ ref, ...others }: UseFormRegisterReturn) {
+  return { inputRef: ref, ...others }
 }
 
 export default Page
