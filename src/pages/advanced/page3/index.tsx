@@ -15,9 +15,9 @@ const Page = () => {
   return (
     <form onSubmit={handleSubmit(handleValid, handleInvalid)} noValidate>
       <div>名前:</div>
-      <InputField {...fieldValues.name} id="name" errors={errors.name} />
+      <InputField {...fieldValues.name} errors={errors.name} />
       <div>メール:</div>
-      <InputField {...fieldValues.email} id="email" errors={errors.email} />
+      <InputField {...fieldValues.email} errors={errors.email} />
       <button>submit</button>
     </form>
   )

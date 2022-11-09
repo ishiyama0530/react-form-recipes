@@ -47,7 +47,7 @@ export const useUserForm = () => {
   }
 }
 
-// Input.tsxではrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
+// InputField.tsxはrefの代わりにinputRefを定義しているので、ref->inputRefにセットし直します。
 function convert({ ref, ...others }: UseFormRegisterReturn) {
   return { inputRef: ref, ...others }
 }
